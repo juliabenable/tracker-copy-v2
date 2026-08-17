@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Show the work — tracker copy v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f9fafb; color: #1c1c1c; -webkit-font-smoothing: antialiased; padding: 0 0 120px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+  .hero { padding: 46px 0 8px; }
+  h1 { font-size: 29px; letter-spacing: -0.5px; }
+  .sub { color: #717171; font-size: 14.5px; margin: 10px 0 0; max-width: 880px; line-height: 1.65; }
+  .sub b { color: #1c1c1c; }
+
+  nav.toc { position: sticky; top: 0; z-index: 40; background: rgba(249,250,251,0.93); backdrop-filter: blur(8px); border-bottom: 1px solid #ececec; margin-top: 24px; }
+  nav.toc .wrap { display: flex; gap: 4px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+  nav.toc a { font-size: 12.5px; font-weight: 600; color: #717171; text-decoration: none; padding: 6px 11px; border-radius: 999px; }
+  nav.toc a:hover { background: #f0edfb; color: #5e41d6; }
+
+  section.chapter { padding-top: 48px; }
+  .kicker { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #7a5cfa; margin-bottom: 7px; }
+  h2 { font-size: 22px; letter-spacing: -0.3px; }
+  h2 .light { color: #9a9a9a; font-weight: 600; }
+  .ask { font-size: 14.5px; color: #555; margin: 9px 0 24px; max-width: 880px; line-height: 1.65; }
+  .ask b { color: #1c1c1c; }
+
+  .rules { background: #1c1c1c; border-radius: 16px; padding: 20px 24px; margin-top: 22px; }
+  .rules h3 { color: #fff; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .rules ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px 26px; }
+  .rules li { list-style: none; font-size: 13px; color: #c6c6c6; line-height: 1.55; padding-left: 19px; position: relative; }
+  .rules li::before { content: '✓'; position: absolute; left: 0; color: #7ddca4; font-weight: 800; font-size: 11px; top: 2px; }
+  .rules li b { color: #fff; }
+  .rules li.n::before { content: '★'; color: #ffc93f; }
+
+  /* work-type legend */
+  .legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 20px; }
+  .work { background: #fff; border: 1px solid #e6e6e6; border-radius: 13px; padding: 13px 15px; display: flex; gap: 11px; align-items: flex-start; }
+  .work .em { font-size: 19px; line-height: 1.2; flex: none; }
+  .work b { font-size: 13.5px; display: block; }
+  .work p { font-size: 12px; color: #717171; line-height: 1.5; margin-top: 2px; }
+
+  /* day blocks */
+  .dayhead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 40px 0 4px; }
+  .daynum { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+  .dayctx { font-size: 12.5px; color: #8e8e8e; }
+  .modechip { font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: #eef0f1; color: #6a6f6a; border-radius: 999px; padding: 3px 9px; }
+  .modechip--local { background: #fdf3ec; color: #9a4a15; }
+  .modechip--brand { background: #f5f3fc; color: #5e41d6; }
+  .delta { font-size: 12.5px; color: #5f5f5f; background: #f2f6f3; border: 1px solid #dcebe1; border-radius: 10px; padding: 9px 13px; margin: 10px 0 16px; line-height: 1.55; max-width: 980px; }
+  .delta b { color: #14603d; }
+
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; margin-bottom: 20px; }
+  @media (max-width: 980px) { .cmp { grid-template-columns: 1fr; } }
+  .vlab { font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; color: #9a9a9a; }
+  .vlab--v2 { color: #17864f; }
+
+  /* the rail card, at production fidelity */
+  .railcard { background: #fff; border: 1px solid #e6e6e6; border-radius: 16px; padding: 18px 18px 8px; }
+  .col--v2 .railcard { border-color: #bcdcc9; box-shadow: 0 4px 10px rgba(23,134,79,0.06); }
+  .rc-head { display: flex; gap: 11px; align-items: center; margin-bottom: 13px; }
+  .rc-tile { width: 34px; height: 34px; border-radius: 9px; background: #f5f3fc; display: grid; place-items: center; font-size: 16px; flex: none; }
+  .rc-title { font-size: 15px; font-weight: 800; letter-spacing: -0.2px; }
+  .rc-sub { font-size: 12px; color: #8e8e8e; margin-top: 1px; }
+  .rc-sub b { color: #1c1c1c; font-weight: 700; }
+  .note { display: flex; gap: 11px; padding: 10px 2px; border-bottom: 1px solid #f2f2f2; }
+  .note:last-of-type { border-bottom: 0; }
+  .note .em { font-size: 16px; flex: none; width: 22px; text-align: center; }
+  .note p { font-size: 13px; line-height: 1.5; color: #5f5f5f; }
+  .note p b { color: #1c1c1c; font-weight: 700; }
+  .note .star { color: #d79f22; font-weight: 800; font-size: 11px; margin-left: 5px; letter-spacing: 0.04em; }
+  .closer { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #ececec; margin-top: 4px; padding: 12px 2px; }
+  .closer .tx { font-size: 13px; font-weight: 700; }
+  .closer.clear .tx { font-weight: 600; color: #1c6b46; display: flex; gap: 8px; align-items: center; }
+  .closer.clear .tx::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2fa96a; flex: none; }
+  .closer .cta { flex: none; background: #7a5cfa; color: #fff; font-size: 12.5px; font-weight: 700; padding: 8px 16px; border-radius: 999px; }
+
+  .ann { font-size: 11.5px; color: #717171; margin-top: 8px; line-height: 1.7; }
+  .ann .c { display: inline-block; background: #eef6f1; color: #14603d; border-radius: 999px; padding: 1px 8px; font-weight: 700; font-size: 10.5px; margin-right: 4px; white-space: nowrap; }
+  .ann .c--new { background: #fbeccd; color: #8a5a0c; }
+  .ann .c--you { background: #fdf3e2; color: #9a6412; }
+  .ann .c--k { background: #f0edfb; color: #5e41d6; }
+
+  /* Katie pass */
+  .kp { display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; align-items: start; margin-top: 20px; }
+  @media (max-width: 980px) { .kp { grid-template-columns: 1fr; } }
+  .kp-good { background: #f2f8f4; border: 1px solid #cfe6d8; border-radius: 16px; padding: 18px 20px; }
+  .kp-good h3 { font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #14603d; margin-bottom: 11px; }
+  .kp-good li { list-style: none; font-size: 13px; color: #3d5247; line-height: 1.55; padding: 7px 0 7px 22px; position: relative; border-bottom: 1px solid #dfeee5; }
+  .kp-good li:last-child { border-bottom: 0; }
+  .kp-good li::before { content: '♥'; position: absolute; left: 2px; top: 8px; color: #2fa96a; font-size: 11px; }
+  .kp-good li b { color: #0d4830; }
+
+  /* tables for bar / statuses / history */
+  .tbl { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e6e6e6; border-radius: 14px; overflow: hidden; margin-top: 16px; font-size: 13px; }
+  .tbl th { text-align: left; font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: #8e8e8e; background: #fafafa; padding: 10px 14px; border-bottom: 1px solid #ececec; }
+  .tbl td { padding: 11px 14px; border-bottom: 1px solid #f2f2f2; vertical-align: top; line-height: 1.5; }
+  .tbl tr:last-child td { border-bottom: 0; }
+  .tbl .who { font-weight: 700; white-space: nowrap; }
+  .tbl .st { color: #8e8e8e; font-size: 11.5px; white-space: nowrap; }
+  .tbl .v1c { color: #8e8e8e; }
+  .tbl .v2c { color: #1c1c1c; border-left: 3px solid #bcdcc9; background: #fbfdfc; }
+  .tbl .v2c b { color: #14603d; }
+  .keep { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #9a9a9a; background: #f2f2f4; border-radius: 999px; padding: 2px 8px; }
+  .newpill { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a0c; background: #fbeccd; border-radius: 999px; padding: 2px 8px; }
+  .sect-h { font-size: 15px; font-weight: 800; margin: 30px 0 4px; }
+  .sect-p { font-size: 13px; color: #717171; line-height: 1.6; max-width: 880px; }
+
+  /* coverage map */
+  .cov td.dot { text-align: center; }
+  .cov .on { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2fa96a; }
+  .cov .new { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f0b93f; }
+
+  .qs { background: #fffaf0; border: 1px solid #f2e3c6; border-radius: 16px; padding: 20px 24px; margin-top: 26px; }
+  .qs h3 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a0c; margin-bottom: 12px; }
+  .qs ol { padding-left: 20px; }
+  .qs li { font-size: 13.5px; color: #6d5a2c; line-height: 1.6; margin-bottom: 9px; }
+  .qs li b { color: #4d3d10; }
+  footer { margin-top: 60px; font-size: 12px; color: #9a9a9a; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap hero">
+  <h1>Show the work — tracker copy, version 2</h1>
+  <p class="sub">Every state the campaign tracker's language can be in — the <b>Up next</b> card, <b>While you were away</b>, the tracker bar, creator-row statuses, stage history and page chrome — listed side by side: <b>V1 (live today)</b> vs <b>V2 (proposed)</b>. The v2 goal: make the brand see everything <b>Katie and her team</b> are doing behind the scenes — the texts, the reminders, the tracking, the product picks, the visit coordination, the payouts — so they feel they never have to do any of it. Human, never machine. For Julia + Katie to review line by line. <b>Updated Aug 13 after the Julia × Katie review</b> — her steers are folded into the marked days and collected in <a href="#katie" style="color:#5e41d6">the Katie pass</a>. Julia’s own line-by-line review is folded in through Day 16 — Days 22–30 pending. Days 1–3 are out for now: the rail only renders after day 4. <b>This is the working doc</b> — the clean review copy for Katie (no v1, no notes) is at <a href="./" style="color:#5e41d6">the main page</a>.</p>
+</div>
+
+<nav class="toc"><div class="wrap">
+  <a href="#goal">The goal</a>
+  <a href="#rules">Voice rules</a>
+  <a href="#katie">Katie pass</a>
+  <a href="#d4">Day 4–5</a>
+  <a href="#d9">Day 9</a>
+  <a href="#d10">Day 10</a>
+  <a href="#d11">Day 11</a>
+  <a href="#d16">Day 16</a>
+  <a href="#d22">Day 22</a>
+  <a href="#d30">Day 30</a>
+  <a href="#bar">Tracker bar</a>
+  <a href="#rows">Row statuses</a>
+  <a href="#hist">Stage history</a>
+  <a href="#chrome">Page chrome</a>
+  <a href="#cov">Coverage map</a>
+  <a href="#qs">For Katie</a>
+</div></nav>
+
+<section class="chapter wrap" id="goal">
+  <p class="kicker">Why v2</p>
+  <h2>The eight kinds of invisible work we surface</h2>
+  <p class="ask">V1 already tells the truth quietly ("2 reminders to accept sent"). V2 gives the work an <b>author</b>: Katie's team sent them, texted them, helped her pick, watched the tracking, paid everyone. Every number is a <b>real admin count</b> — the SMS log, the reminder log, the tracking events, the payout ledger — so the copy can only ever claim what actually happened. Each v2 line below is tagged with the kind of work it shows.</p>
+  <div class="legend">
+    <div class="work"><span class="em">🔍</span><div><b>Casting &amp; vetting</b><p>Profiles reviewed by hand, engagement checked, replacements sourced in 48h.</p></div></div>
+    <div class="work"><span class="em">📱</span><div><b>Texts &amp; nudges</b><p>The SMSes Katie's team sends — invite chases, check-ins, "you're up" pings. Counted from the SMS log.</p></div></div>
+    <div class="work"><span class="em">⏰</span><div><b>Deadline reminders</b><p>Filming + posting deadlines texted to every creator so the brand never chases anyone.</p></div></div>
+    <div class="work"><span class="em">🧴</span><div><b>Product picks</b><p>Creators choose their favorites from your selection — we set it up and double-check every order. Product collabs.</p></div></div>
+    <div class="work"><span class="em">📅</span><div><b>Visit reminders &amp; check-ins</b><p>The brand sets each visit date — we remind creators before it and check in after. Local collabs.</p></div></div>
+    <div class="work"><span class="em">📦</span><div><b>Tracking watched</b><p>Every tracking number checked daily — creators kept informed so content starts on time.</p></div></div>
+    <div class="work"><span class="em">🛡️</span><div><b>Quality checks</b><p>Every draft reviewed against the brief before anything goes live.</p></div></div>
+    <div class="work"><span class="em">💸</span><div><b>Payments</b><p>Paid campaigns only — most are gifted, and gifted campaigns never show payout lines. Payouts queued and closed out by Katie's team.</p></div></div>
+  </div>
+</section>
+
+<section class="chapter wrap" id="rules">
+  <p class="kicker">Held from v1 + new in v2</p>
+  <h2>Voice rules</h2>
+  <div class="rules">
+    <h3>Every line must pass these</h3>
+    <ul>
+      <li><b>Katie's team, never a machine.</b> Work has a human author: "Katie's team texted 2 reminders", never "Reminders sent" or "Scanning…".</li>
+      <li><b>Never solo Katie</b> in operational claims — "Katie's team" / "we". Katie's first person lives only in her signed cursive notes.</li>
+      <li class="n"><b>Receipts, not vibes.</b> Every count is pulled from admin logs (SMS, reminders, tracking, payouts). If the count is zero, the line hides — no zeros, ever.</li>
+      <li class="n"><b>Close with "nothing for you to do."</b> Every all-clear closer reassures + gives an honest horizon ("first delivery lands Thursday").</li>
+      <li class="n"><b>One amber exception:</b> when the brand <i>does</i> owe a step (ship an order, review matches, say thanks), say it's the <b>only</b> step that's theirs.</li>
+      <li><b>Only knowable facts</b> — tracking events, creator confirmations relayed by Katie's team, public posts, deadlines we set. No feelings, no off-platform scenes.</li>
+      <li><b>Count stages, never "all/last X"</b> unless literally true. Declines are reassurance — the replacement story, never a dead end.</li>
+      <li><b>Views only &gt;1k · quotes only &gt;50 likes · top post = likes + comments · no link metrics, ever.</b></li>
+      <li><b>Vague-but-honest timing</b> for creator-controlled steps ("usually within 48h"); real dates only for what we control or observe.</li>
+      <li class="n"><b>SMS lines only reference opted-in creators</b> (portal checkbox = the legal opt-in). Counts come from the same log, so this is automatic.</li>
+      <li class="n"><b>Personal beats operational.</b> Lead with the hands-on relationship ("individually texting each creator"), not task volume. Never sound like a struggling operation. <i>(Katie, Aug 13)</i></li>
+      <li class="n"><b>No pool numbers at the invite stage</b> ("214 profiles") and <b>no engagement metrics before posts exist</b>. <i>(Katie, Aug 13)</i></li>
+      <li class="n"><b>Submit deadlines are not go-live promises.</b> Say "you should start seeing content next week", never "drafts due Sunday" to the brand. <i>(Katie, Aug 13)</i></li>
+      <li class="n"><b>Speed receipts only when true</b> ("took less than 24 hours") — highlight pace when it's fast, say nothing when it isn't.</li>
+      <li class="n"><b>Creators are they/them</b> in every line — never "she/her". Applies to kept-v1 strings too when they ship. <i>(Julia, Aug 13)</i></li>
+      <li class="n"><b>Visits belong to the brand</b> — creators email the brand, the brand sets the date. Our verbs: remind, track, check in — never "coordinate". <i>(Julia, Aug 13)</i></li>
+      <li class="n"><b>Creators pick products on their own</b> — we set up the selection and double-check orders; no "helped her pick". <i>(Julia, Aug 13)</i></li>
+      <li class="n"><b>Benable-review mode: the brand never sees first cuts</b> — closers stay all-clear until posts go live. <i>(Julia, Aug 13)</i></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════ KATIE PASS ══════════ -->
+<section class="chapter wrap" id="katie">
+  <p class="kicker">Aug 13 · Julia × Katie review</p>
+  <h2>The Katie pass — what we want, what we're careful about</h2>
+  <p class="ask">Katie's read on v2, distilled from the call. The big steer: lead with the <b>personal, hands-on relationship</b> — not the volume of operational tasks. The tracker should make brands feel <b>cared for</b>, never like they're watching a struggling operation.</p>
+  <div class="kp">
+    <div class="kp-good">
+      <h3>♥ Lead with — the language Katie wants</h3>
+      <ul>
+        <li><b>Personalized, individual touch:</b> "6 personalized emails" · "individually texting each creator to make sure they see their invite ASAP".</li>
+        <li><b>Vetting the brand cares about:</b> reviewed against your brief + <b>confirmed open to gifted products</b>.</li>
+        <li><b>Warm picks:</b> creators "choose their favorite products from your selection" — we double-check everything runs smoothly.</li>
+        <li><b>Shipping comms:</b> we tell each creator when their product ships and lands — and that it's time to film; tracking shared so they can plan their week.</li>
+        <li><b>Pre-delivery readiness:</b> "we confirmed they're ready to film and know the campaign requirements."</li>
+        <li><b>Individual deadline dates by text</b> — each creator reminded of <i>their</i> date.</li>
+        <li><b>Local:</b> "Share the visit date and we'll handle reminding creators" · "First creator visits tomorrow — we've sent them a reminder."</li>
+        <li><b>Replacements:</b> already sourcing — "we'll ping you ASAP."</li>
+        <li><b>Follow-ups, neutral:</b> "If any follow-ups are needed, Katie's team will be on it."</li>
+      </ul>
+    </div>
+    <div>
+      <table class="tbl" style="margin-top:0">
+        <tr><th style="width:44%">⚠️ Never say</th><th style="width:56%">Why</th></tr>
+        <tr><td class="who" style="white-space:normal">"Reminders to unresponsive creators"</td><td class="v1c">Implies we're struggling to get commitments. Reminder lines stay neutral — "still deciding".</td></tr>
+        <tr><td class="who" style="white-space:normal">Pool sizes at the invite stage ("214 profiles")</td><td class="v1c">Brands have no context — reads as "that's the whole pool" and implies later campaigns get weaker creators. Numbers live in the sourcing phase, if anywhere.</td></tr>
+        <tr><td class="who" style="white-space:normal">"Engagement" metrics before posts exist</td><td class="v1c">Not established yet — raises questions we don't want at this stage.</td></tr>
+        <tr><td class="who" style="white-space:normal">Submit deadlines as go-live promises ("10-day window", "drafts due Sunday")</td><td class="v1c">That's the <i>submit</i> deadline, not go-live. Say "you should start seeing content next week".</td></tr>
+        <tr><td class="who" style="white-space:normal">"Reshare the brief"</td><td class="v1c">Too passive — say "we confirmed they're ready to film and fulfill the campaign requirements".</td></tr>
+        <tr><td class="who" style="white-space:normal">"Don't worry, we handle everything"</td><td class="v1c">Over-promise. The neutral follow-ups line instead.</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="delta" style="margin-top:18px"><b>Decisions from the call:</b> Days 4 and 5 <b>combine</b> where acceptances overlap outreach (they often happen the same day) · sourcing lines render only while sourcing is actually happening · <b>four variant axes</b> to finish: Product / Local × Katie-reviews / Brand-reviews × <b>Multi-location / Single location</b> (the multi-location axis is new — not yet in this doc) · Julia finishes the full draft solo, then one final Katie review.</div>
+</section>
+
+<!-- ══════════ DAY 4–5 ══════════ -->
+<section class="chapter wrap" id="d4">
+  <p class="kicker">Active · days 4 + 5 combined (Katie pass) — product and local variants below</p>
+  <h2>Day 4–5 · Invites out &amp; first yeses <span class="light">— "since yesterday"</span></h2>
+  <p class="ask">Invites and first acceptances usually overlap — often the same day — so per the Katie pass this is <b>one combined state</b>. The work to show: personalized outreach, the individual vetting already done, and the creator-side comms that keep everything moving without the brand.</p>
+  <div class="delta"><b>What changed (Katie pass):</b> "6 invites sent" → <b>6 personalized emails</b>; new <b>individually-texting</b> line so every creator sees her invite ASAP; new <b>vetting receipt</b> (checked against your brief + confirmed open to gifted products); first yeses fold in when they land; the closer goes neutral — "if any follow-ups are needed, Katie's team is on it." v1 has no day-5 state at all.</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>yesterday</b></p></div></div>
+        <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
+        <div class="closer clear"><span class="tx">Nothing needs you — acceptances usually land within 48h</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>yesterday</b></p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>6 personalized emails sent</b> — invites out the moment you approved your picks</p></div>
+        <div class="note"><span class="em">📱</span><p><b>Katie’s team is individually texting each creator</b> — making sure they see their invite ASAP<span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">🔍</span><p><b>Every creator was individually reviewed</b> — checked against your brief and confirmed open to gifted products<span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">✅</span><p><b>First yeses are in</b> — 2 accepted on day one<span class="star">★ NEW</span></p></div>
+        <div class="closer clear"><span class="tx">Nothing for you to do — if any follow-ups are needed, Katie’s team is on it</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ 3 new lines</span> · the "2 accepted" line renders only when true (speed receipts never fabricated); reminder framing stays neutral — never "unresponsive".</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>First acceptances land</b> — usually within 48h</p></div>
+        <div class="note"><span class="em">📦</span><p><b>Product picks + shipping</b> — right after each acceptance</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>First creators accept the campaign</b> — usually within 48h</p></div>
+        <div class="note"><span class="em">🧴</span><p><b>Creators pick their favorite products from your selection</b> — we double-check everything runs smoothly</p></div>
+        <div class="note"><span class="em">📦</span><p><b>We tell each creator when their product ships and lands</b> — and help them track it by text<span class="star">★ NEW</span></p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🧴 product picks</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · "pick their favorites" is Katie's warm framing of the selection moment; the shipping line covers the old day-5 notes ("we handle telling creators when products ship and deliver — so they can start planning their content").</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>First acceptances land</b> — usually within 48h</p></div>
+        <div class="note"><span class="em">📧</span><p><b>Creators email you to book their visits</b> — right after each acceptance</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>First creators accept the campaign</b> — usually within 48h</p></div>
+        <div class="note"><span class="em">📧</span><p><b>Creators email you to book their visits</b> — right after each acceptance</p></div>
+        <div class="note"><span class="em">📅</span><p><b>Share each visit date with us</b> — we’ll handle reminding the creators<span class="star">★ NEW</span></p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">📱 texts</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · the share-the-date prompt turns the brand’s one email into delegation — after that, reminders are ours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 9 ══════════ -->
+<section class="chapter wrap" id="d9">
+  <p class="kicker">Active · product and local variants below</p>
+  <h2>Day 9 · Cooking <span class="light">— "since Friday"</span></h2>
+  <p class="ask">The first "came back after the weekend" moment. The Katie pass reframes it: celebrate the speed (when it's true), keep the reminder line neutral, and show the <b>readiness work</b> that happens right before packages land.</p>
+  <div class="delta"><b>What changed (Katie pass + Julia review):</b> visit dates are the brand’s to set — the local line becomes reminder work, never "coordinated by Katie’s team". The acceptance line carries a <b>speed receipt</b> ("took less than 24 hours") · reminders stay but only ever "still deciding" — never "unresponsive" · product-pick help moved to Day 4–5; its slot goes to the new <b>pre-delivery readiness check</b> ("ready to film and knows the campaign requirements" — never "reshared the brief") · the replacement promise becomes "we'll ping you ASAP".</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
+        <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
+        <div class="note"><span class="em">👋</span><p><b>2 reminders to accept sent</b> — nothing needed your input</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — we’re already sourcing replacements</p></div>
+        <div class="closer clear"><span class="tx">Nothing needs you — first packages land Thursday</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">✅</span><p><b>4 creators accepted their invites</b> — took less than 24 hours</p></div>
+        <div class="note"><span class="em">📱</span><p><b>Katie’s team texted 2 reminders</b> to the creators still deciding — nothing needed from you</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — Katie’s team is already sourcing a replacement</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>Before each package lands, we confirm they’re ready to film</b> — and know the campaign requirements<span class="star">★ NEW</span></p></div>
+        <div class="closer clear"><span class="tx">Nothing for you to do — first delivery lands Thursday; we’re watching every package</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">🔍 casting</span> <span class="c">🛡️ checks</span> <span class="c">📦 tracking</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · the speed receipt renders only when literally true — quiet when it isn't.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — first delivery Thursday</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement picks</b> — within 48h — we’ll ping you</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📦</span><p><b>First delivery lands Thursday</b> — we’re watching all 3 tracking numbers and keeping each creator posted so they can plan their week</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement picks from Katie’s team</b> — we’re on it, we’ll ping you ASAP</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive; we’ll ping you as content goes live</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📦 tracking</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> · deadline talk waits until content is in motion — submit dates are never shown to the brand as go-live.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
+        <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
+        <div class="note"><span class="em">👋</span><p><b>2 reminders to accept sent</b> — nothing needed your input</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — we’re already sourcing replacements</p></div>
+        <div class="closer"><span class="tx">Sofia emailed you — set her visit date</span><span class="cta">Confirm visit</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">✅</span><p><b>4 creators accepted their invites</b> — took less than 24 hours</p></div>
+        <div class="note"><span class="em">📱</span><p><b>Katie’s team texted 2 reminders</b> to the creators still deciding — nothing needed from you</p></div>
+        <div class="note"><span class="em">📅</span><p><b>3 visits booked for this week</b> — we remind each creator before their visit</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — Katie’s team is already sourcing a replacement</p></div>
+        <div class="closer"><span class="tx">Sofia emailed you — reply to set the visit date</span><span class="cta">Confirm visit</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">📅 visits</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> <span class="c--you c">amber: brand step</span> · when several creators have emailed, the closer aggregates: <b>"Sofia and 2 more emailed you — set their visit dates."</b></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>First creator to visit</b> — tomorrow</p></div>
+        <div class="note"><span class="em">📅</span><p><b>You have 3 creators visiting next week</b> — dates confirmed</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement picks</b> — within 48h — we’ll ping you</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>First creator visits tomorrow</b> — we’ve already sent them a reminder</p></div>
+        <div class="note"><span class="em">📅</span><p><b>3 more visits next week</b> — we’re keeping track of everything for you</p></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement picks from Katie’s team</b> — we’re on it, we’ll ping you ASAP</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">📱 texts</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> · once visits start producing footage: <b>"First creators are filming — we’ll ping you as content goes live."</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 10 ══════════ -->
+<section class="chapter wrap" id="d10">
+  <p class="kicker">Active · product only — non-Shopify (CSV) fulfillment</p>
+  <h2>Day 10 · You ship <span class="light">— "since Friday"</span></h2>
+  <p class="ask">The one day the brand genuinely owes work (shipping their own orders). v2's job is contrast: <b>here is everything we're doing — this one step is yours.</b> It's also where the first explicit <b>texts-this-week receipt</b> lands, so the count arrives while the campaign feels busiest.</p>
+  <div class="delta"><b>What changed:</b> the new 📱 receipt counts the week's texts, and the closer frames shipping as <b>the only step that's yours</b>. <b>Julia review:</b> creators pick on their own — "helped them pick" is gone (they picked their favorites; we double-check the orders) · the tracking line ends "keep the creators informed", not "nudge if one stalls".</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
+        <div class="note"><span class="em">🧴</span><p><b>2 creators picked their products</b> — their orders are ready for you</p></div>
+        <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — we’re watching the tracking</p></div>
+        <div class="closer"><span class="tx">2 orders are ready to ship</span><span class="cta">Download orders</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="note"><span class="em">🧴</span><p><b>Sofia and Priya picked their favorites from your selection</b> — their orders are ready for you</p></div>
+        <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — we check the tracking daily and keep the creators informed</p></div>
+        <div class="note"><span class="em">📱</span><p><b>9 texts this week</b> kept everything moving — replies, picks and ship dates<span class="star">★ NEW</span></p></div>
+        <div class="closer"><span class="tx">2 orders are ready to ship — the only step that’s yours</span><span class="cta">Download orders</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🧴 product picks</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c--you c">amber: brand step</span> <span class="c--new c">★ new line</span> · the 9 comes straight from the SMS log for this campaign-week.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📦</span><p><b>2 orders waiting on your shipment</b> — mark shipped + add tracking</p></div>
+        <div class="note"><span class="em">🚚</span><p><b>We track every delivery once tracking is in</b> — automatic</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📦</span><p><b>2 orders waiting on your shipment</b> — ship + add tracking, and you’re done</p></div>
+        <div class="note"><span class="em">🚚</span><p><b>We take it from there</b> — Katie’s team watches every delivery and keeps the creators posted</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c--k c">Katie pass</span> <span class="c--you c">amber: brand step</span> · "automatic" (machine word) → "Katie's team watches every delivery"; filming tied to delivery, not a promised weekend.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 11 ══════════ -->
+<section class="chapter wrap" id="d11">
+  <p class="kicker">Active · rematch found — product and local variants below</p>
+  <h2>Day 11 · Rematch found <span class="light">— "since Thursday"</span></h2>
+  <p class="ask">The recovery story. A creator dropped and the system already fixed it — v2 makes the speed explicit (<b>found in 48h</b>, already vetted) and turns "deadline reminders sent" into a person texting every creator her date.</p>
+  <div class="delta"><b>What changed:</b> the rematch line carries the 48h receipt + who vetted; the deadline line names the sender and the channel; delivery line keeps its numbers but adds that we're the ones watching. <b>Julia review:</b> "waiting on you" dropped from the pick line (it's vetted-and-ready, not a nag) · the visit line is reminder work, not coordination · the "content lands after each visit" line is cut — it over-promised timing.</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement matches found</b> — profiles ready for your review</p></div>
+        <div class="note"><span class="em">📬</span><p><b>2 packages delivered</b> — 3 more on the truck</p></div>
+        <div class="note"><span class="em">⏰</span><p><b>Deadline reminders sent</b> to keep everyone on pace</p></div>
+        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement matches found in 48h</b> — Katie’s team already vetted the profiles</p></div>
+        <div class="note"><span class="em">📬</span><p><b>2 packages delivered, 3 more on the truck</b> — we’re tracking every one</p></div>
+        <div class="note"><span class="em">📱</span><p><b>Katie’s team texted every creator their filming deadline</b> — everyone knows their date</p></div>
+        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">✨</span><p><b>Pick who you want to add to this campaign</b> — waiting on you</p></div>
+        <div class="note"><span class="em">📦</span><p><b>Last packages deliver</b> — by tomorrow</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">✨</span><p><b>Pick who joins the campaign</b> — Katie’s team already vetted them, ready for your review</p></div>
+        <div class="note"><span class="em">📦</span><p><b>Last packages land by tomorrow</b> — we’re watching the tracking</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive; we’ll ping you as content goes live</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📦 tracking</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement matches found</b> — profiles ready for your review</p></div>
+        <div class="note"><span class="em">💅</span><p><b>2 creators visited this week</b> — content is on the way</p></div>
+        <div class="note"><span class="em">⏰</span><p><b>Deadline reminders sent</b> to keep everyone on pace</p></div>
+        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
+        <div class="note"><span class="em">🔁</span><p><b>Replacement matches found in 48h</b> — Katie’s team already vetted the profiles</p></div>
+        <div class="note"><span class="em">💅</span><p><b>2 creators visited this week</b> — we checked in with both after their visits; they’re creating content!<span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">📱</span><p><b>Katie’s team texted every creator their content deadline</b> — everyone knows their date</p></div>
+        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📅 visits</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--new c">★ new</span> · the day-after check-in is real admin work — say it.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">✨</span><p><b>Pick who you want to add to this campaign</b> — waiting on you</p></div>
+        <div class="note"><span class="em">📅</span><p><b>3 more visits booked</b> — Friday through Sunday</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>Content lands after each visit</b> — within days</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">✨</span><p><b>Pick who joins the campaign</b> — profiles vetted and ready for your review</p></div>
+        <div class="note"><span class="em">📅</span><p><b>3 more visits, Friday through Sunday</b> — we’ll remind each creator the day before</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📅 visits</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 16 ══════════ -->
+<section class="chapter wrap" id="d16">
+  <p class="kicker">Active · first content — 4 variants: product/local × Katie-reviews/brand-reviews</p>
+  <h2>Day 16 · First content <span class="light">— "since Sunday"</span></h2>
+  <p class="ask">Drafts are landing. This is the <b>quality-check</b> day: whoever reviews (Katie's team by default, the brand for Trilogy-style accounts), v2 makes the pre-check work visible and re-voices "nudges" as texted reminders. The reminder count (4) reads from the log.</p>
+  <div class="delta"><b>What changed:</b> "4 filming nudges sent" → <b>"4 deadline-reminder texts sent"</b> with Katie's team as sender; the review lines say the drafts are checked <b>against your brief</b>, not just "for quality"; brand-review variants keep the shield line — it's already the strongest work-proof in v1. <b>Katie pass:</b> submit windows ("drafts land through Sunday") are gone from brand-facing lines — the submit deadline isn't the go-live date; content timing reads <b>"you should see it live next week."</b> <b>Julia review:</b> in Benable-review mode the brand never sees first cuts — both benable closers flip to a green all-clear (no "Watch the first cuts").</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — product · Katie's team reviews</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
+        <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>2 videos submitted for review</b> — Katie’s team is reviewing them for quality</p></div>
+        <div class="closer"><span class="tx">2 new videos are ready for a look</span><span class="cta">Watch the first cuts</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — product · Katie's team reviews</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
+        <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — Katie’s team keeps everyone on pace, nothing needed from you</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>2 videos in — Katie’s team is checking them against your brief</b> before anything goes live</p></div>
+        <div class="closer clear"><span class="tx">Nothing for you to do — Katie’s team is reviewing the first cuts; you should see them live next week</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c">🛡️ checks</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — product · <span class="modechip modechip--brand">brand reviews</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>2 posts passed Katie’s team’s checks</b> — brief points verified before they reached you</p></div>
+        <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
+        <div class="closer"><span class="tx">Jade’s reel and Priya’s story are ready for you</span><span class="cta">Review the 2 posts</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — product · <span class="modechip modechip--brand">brand reviews</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>Katie’s team pre-checked 2 posts</b> — brief points verified before they reached you</p></div>
+        <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — everyone knows their date</p></div>
+        <div class="closer"><span class="tx">Jade’s reel and Priya’s story are ready for you</span><span class="cta">Review the 2 posts</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — product · Up next (Katie reviews / brand reviews)</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — after quality checks!</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>Creators submit drafts — Katie’s team vets every one</b> — through Sunday</p></div>
+        <div class="note"><span class="em">👀</span><p><b>Two posts to review — Jade’s reel and Priya’s story</b> — waiting on you <span class="modechip modechip--brand">brand variant</span></p></div>
+        <div class="note"><span class="em">🎬</span><p><b>More drafts land through Sunday</b> — pre-checked before they reach you <span class="modechip modechip--brand">brand variant</span></p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — product · Up next (Katie reviews / brand reviews)</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — right after Katie’s team’s checks</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>More content is on the way</b> — every draft reviewed against your brief; you should see it live next week</p></div>
+        <div class="note"><span class="em">👀</span><p><b>Two posts to review — Jade’s reel and Priya’s story</b> — ready for your review <span class="modechip modechip--brand">brand variant</span></p></div>
+        <div class="note"><span class="em">🎬</span><p><b>More posts are on the way</b> — Katie’s team pre-checks each one before it reaches you <span class="modechip modechip--brand">brand variant</span></p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c--you c">amber: brand step (brand variant)</span> · brand-variant line 1 stays untouched — it's the brand's to-do, keep it clean.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · Katie's team reviews</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — everyone’s been in</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>3 posts submitted for review</b> — Katie’s team is checking them for quality</p></div>
+        <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
+        <div class="closer"><span class="tx">3 new posts are ready for a look</span><span class="cta">Watch the first cuts</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · Katie's team reviews</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — we checked in with each one after their visit</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>3 posts in — Katie’s team is checking them against your brief</b> before anything goes live</p></div>
+        <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — nothing needed from you</p></div>
+        <div class="closer clear"><span class="tx">Nothing for you to do — Katie’s team is reviewing the first cuts; you should see them live next week</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · <span class="modechip modechip--brand">brand reviews</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — everyone’s been in</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>3 posts passed Katie’s team’s checks</b> — brief points verified before they reached you</p></div>
+        <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
+        <div class="closer"><span class="tx">Maya’s and Jade’s posts are ready for you</span><span class="cta">Review the 3 posts</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · <span class="modechip modechip--brand">brand reviews</span></p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — we checked in with each one after their visit</p></div>
+        <div class="note"><span class="em">🛡️</span><p><b>Katie’s team pre-checked all 3 posts</b> — brief points verified before they reached you</p></div>
+        <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — everyone knows their date</p></div>
+        <div class="closer"><span class="tx">Maya’s and Jade’s posts are ready for you</span><span class="cta">Review the 3 posts</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c--you c">amber: brand step</span></p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · Up next (Katie reviews / brand reviews)</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — after quality checks!</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>More drafts land as creators finish editing</b> — Katie’s team vets every one</p></div>
+        <div class="note"><span class="em">📅</span><p><b>Priya visits Thursday, Lena is booking hers</b> — this week</p></div>
+        <div class="note"><span class="em">👀</span><p><b>Three posts to review — Maya’s reel + story, Jade’s TikTok</b> — waiting on you <span class="modechip modechip--brand">brand variant</span></p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · Up next (Katie reviews / brand reviews)</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — right after Katie’s team’s checks</p></div>
+        <div class="note"><span class="em">🎬</span><p><b>More drafts on the way</b> — we text each creator as their deadline nears</p></div>
+        <div class="note"><span class="em">📅</span><p><b>Priya visits Thursday, Lena is booking a time with you</b> — this week</p></div>
+        <div class="note"><span class="em">👀</span><p><b>Three posts to review — Maya’s reel + story, Jade’s TikTok</b> — ready for your review <span class="modechip modechip--brand">brand variant</span></p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c">📅 visits</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 22 ══════════ -->
+<section class="chapter wrap" id="d22">
+  <p class="kicker">Active · going live — product + local share this state</p>
+  <h2>Day 22 · Going live <span class="light">— "since Monday"</span></h2>
+  <div class="delta" style="background:#fffaf0;border-color:#f2e3c6;color:#6d5a2c"><b>⏸ Review checkpoint:</b> Julia’s line-by-line pass (Aug 13) stopped at Day 16 — Day 22 and Day 30 below are not yet reviewed.</div>
+  <p class="ask">The celebration day — and where <b>payments</b> enter the story. v1 is all results (views, quotes); v2 keeps the joy but slips in two receipts: tags/links were verified by a person, and payouts are already in motion so the brand never wonders "do I owe anyone money?"</p>
+  <div class="delta"><b>What changed:</b> live-post line credits the verification work; <b>new 💸 payments line</b> ("in motion — handled by Katie's team"); Up next adds the payout promise and reframes the thank-you as <b>the one thing only you can do</b>.</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Monday</b></p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>3 posts went live</b> on IG &amp; TikTok</p></div>
+        <div class="note"><span class="em">👀</span><p><b>18.2k views</b> and climbing</p></div>
+        <div class="note"><span class="em">💬</span><p><b>People are loving it</b> — “best SPF I’ve tried, hands down” · @niaglow</p></div>
+        <div class="closer"><span class="tx">Nia’s reel is taking off</span><span class="cta">Open the post</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Monday</b></p></div></div>
+        <div class="note"><span class="em">📣</span><p><b>3 posts went live</b> on IG &amp; TikTok — tags and links verified by Katie’s team</p></div>
+        <div class="note"><span class="em">👀</span><p><b>18.2k views</b> and climbing — we’re tracking how every post is doing for you</p></div>
+        <div class="note"><span class="em">💸</span><p><b>Creator payouts are in motion</b> — Katie’s team handles every payment, nothing for you to settle <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">💬</span><p><b>People are loving it</b> — “best SPF I’ve tried, hands down” · @niaglow</p></div>
+        <div class="closer"><span class="tx">Nia’s reel is taking off</span><span class="cta">Open the post</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c">📦 tracking</span> <span class="c">💸 payments</span> <span class="c--new c">★ new line</span> · quote rules hold: views only &gt;1k, quote only &gt;50 likes.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>Send your thank-yous</b> — 3 creators are live</p></div>
+        <div class="note"><span class="em">⏰</span><p><b>Last creators go live</b> — this week</p></div>
+        <div class="note"><span class="em">🏁</span><p><b>Campaign wrap</b> — we’ll send you your campaign recap</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">💌</span><p><b>Send your thank-yous</b> — 3 creators are live; a thank-you from you lands deeper than anything we could send</p></div>
+        <div class="note"><span class="em">⏰</span><p><b>Last creators go live this week</b> — we’ve texted each one their posting date</p></div>
+        <div class="note"><span class="em">💸</span><p><b>Payouts close as each post goes live</b> — Katie’s team pays everyone for you <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">🏁</span><p><b>Campaign wrap</b> — your recap arrives from Katie’s team</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c">💸 payments</span> <span class="c--you c">amber: thank-yous (a gift, never a chore — stays out of the waiting-count)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAY 30 ══════════ -->
+<section class="chapter wrap" id="d30">
+  <p class="kicker">Wrap · product + local share this state</p>
+  <h2>Day 30 · Wrap <span class="light">— "since last week"</span></h2>
+  <p class="ask">The wrap is where the whole month of invisible work gets its receipt. v2 adds the <b>behind-the-scenes tally</b> — texts, reminders, payouts, one line — and confirms every creator is paid. This line is also the bridge to the next campaign: this is what "we run it for you" buys.</p>
+  <div class="delta"><b>What changed:</b> <b>new 🧾 tally line</b> (counts from the SMS log, reminder log and payout ledger) + <b>new 💸 "all 6 creators paid"</b>. Up next stays one line, now with Katie's team ready when you are.</div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>last week</b></p></div></div>
+        <div class="note"><span class="em">🏆</span><p><b>Top post: 63 likes &amp; comments</b> — Nia’s reel</p></div>
+        <div class="note"><span class="em">💌</span><p><b>Thank-yous sent</b> to all 6 creators</p></div>
+        <div class="closer"><span class="tx">Your wrap-up is ready</span><span class="cta">See the wrap-up</span></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>last week</b></p></div></div>
+        <div class="note"><span class="em">🏆</span><p><b>Top post: 63 likes &amp; comments</b> — Nia’s reel</p></div>
+        <div class="note"><span class="em">💸</span><p><b>All 6 creators paid</b> — Katie’s team closed out every payout for you <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">💌</span><p><b>Thank-yous sent to all 6</b> — every one delivered with your name on it</p></div>
+        <div class="note"><span class="em">🧾</span><p><b>Behind the scenes: 41 texts · 12 reminders · 6 payouts</b> — handled by Katie’s team so you never had to <span class="modechip">payouts: paid campaigns</span><span class="star">★ NEW</span></p></div>
+        <div class="closer"><span class="tx">Your wrap-up is ready</span><span class="cta">See the wrap-up</span></div>
+      </div>
+      <p class="ann">Shows: <span class="c">💸 payments</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--new c">★ 2 new lines</span> · the tally is the campaign-long sum from the same logs — and the natural seed for the Wrapped-style slides.</p>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="col--v1"><p class="vlab">V1 · live today</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">🚀</span><p><b>Campaign #2 — same crew or fresh faces</b> — whenever you’re ready</p></div>
+      </div>
+    </div>
+    <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
+      <div class="railcard">
+        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="note"><span class="em">🚀</span><p><b>Campaign #2 — same crew or fresh faces</b> — Katie’s team is ready when you are</p></div>
+      </div>
+      <p class="ann">Shows: <span class="c">🔍 casting</span> · the ongoing-campaigns offer in one clause: the team stays on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TRACKER BAR ══════════ -->
+<section class="chapter wrap" id="bar">
+  <p class="kicker">Every column · every state</p>
+  <h2>Tracker bar — labels &amp; hints</h2>
+  <p class="ask">Each column = count slab + <b>label</b> (what has happened) + <b>hint</b> (what's happening now). Hints are glanceable — ~35 characters max — so v2 only rewrites the ones where a person can fit; counts stay the star. The biggest fix: empty-stage hints go from passive weather ("As packages arrive") to <b>someone on it</b> ("We're watching the tracking").</p>
+
+  <p class="sect-h">The Sourcing slot (always leftmost)</p>
+  <table class="tbl">
+    <tr><th style="width:16%">State</th><th style="width:22%">When</th><th style="width:29%">V1 hint</th><th style="width:33%">V2 hint</th></tr>
+    <tr><td class="who">Sourcing…</td><td class="st">initial casting, nobody named yet</td><td class="v1c">Matching you with creators</td><td class="v2c"><b>Katie’s team is casting for you</b></td></tr>
+    <tr><td class="who">Sourcing…</td><td class="st">rematch after a decline</td><td class="v1c">Rematching you</td><td class="v2c"><b>Finding a replacement</b></td></tr>
+    <tr><td class="who">Matches found</td><td class="st">rematch candidates ready · amber badge</td><td class="v1c">New profiles to review</td><td class="v2c"><span class="keep">keep v1</span> — it’s the brand’s to-do; keep it clean</td></tr>
+    <tr><td class="who">Done ✓</td><td class="st">campaign underway, nothing sourcing</td><td class="v1c">All done for now</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Idle sliver</td><td class="st">nothing ever sourced</td><td class="v1c">If a spot opens up</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+  </table>
+
+  <p class="sect-h">Stage columns — product</p>
+  <table class="tbl">
+    <tr><th style="width:16%">Column</th><th style="width:14%">State</th><th style="width:32%">V1 hint</th><th style="width:38%">V2 hint</th></tr>
+    <tr><td class="who">Invited</td><td class="st">occupied</td><td class="v1c">Creators are reviewing your invites</td><td class="v2c"><b>Deciding — we text the reminders</b></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">Once you approve</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Accepted</td><td class="st">occupied</td><td class="v1c">1 placing an order / N placing orders</td><td class="v2c"><b>N choosing their favorites</b></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">Waiting on replies</td><td class="v2c"><b>We’re chasing the replies</b></td></tr>
+    <tr><td class="who">Order shipped</td><td class="st">occupied</td><td class="v1c">N packages in transit</td><td class="v2c"><span class="keep">keep v1</span> — the count is the story</td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">As creators pick their products</td><td class="v2c"><b>As creators pick their favorites</b></td></tr>
+    <tr><td class="who">Order delivered</td><td class="st">occupied</td><td class="v1c">N creating content</td><td class="v2c"><b>N filming — deadlines texted</b></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">As packages arrive</td><td class="v2c"><b>We’re watching the tracking</b></td></tr>
+    <tr><td class="who">Draft approved</td><td class="st">occupied</td><td class="v1c">Creator will post soon / N will post soon</td><td class="v2c"><span class="keep">keep v1</span> — no promised dates on creator-controlled steps</td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">Once Katie’s team approves drafts</td><td class="v2c"><span class="keep">keep v1</span> — already Katie’s · brand-review config: “Once you approve each draft”</td></tr>
+    <tr><td class="who">Content published</td><td class="st">occupied</td><td class="v1c">N posts now live!</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">Once quality checks pass</td><td class="v2c"><b>Once Katie’s team’s checks pass</b></td></tr>
+    <tr><td class="who">Thanked</td><td class="st">all thanked · “6 ✨”</td><td class="v1c">Campaign complete!</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">After posts go live</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Any past stage</td><td class="st">everyone beyond · lone ✓</td><td class="v1c">All N moved ahead / N moved ahead</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+  </table>
+
+  <p class="sect-h">Stage columns — local swaps <span class="modechip modechip--local">local</span></p>
+  <table class="tbl">
+    <tr><th style="width:16%">Column</th><th style="width:14%">State</th><th style="width:32%">V1 hint</th><th style="width:38%">V2 hint</th></tr>
+    <tr><td class="who">Accepted</td><td class="st">occupied</td><td class="v1c">1 booking a visit / N booking visits</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">Waiting on replies</td><td class="v2c"><b>We’re chasing the replies</b></td></tr>
+    <tr><td class="who">Confirmed</td><td class="st">occupied</td><td class="v1c">N visits booked</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">As visits are booked</td><td class="v2c"><span class="keep">keep v1</span> — booking is the brand’s; our verb is remind</td></tr>
+    <tr><td class="who">Visited</td><td class="st">occupied</td><td class="v1c">N creating content</td><td class="v2c"><b>N filming — deadlines texted</b></td></tr>
+    <tr><td class="who"></td><td class="st">empty</td><td class="v1c">After each visit</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ ROW STATUSES ══════════ -->
+<section class="chapter wrap" id="rows">
+  <p class="kicker">Creators table · “latest update” lines, every day</p>
+  <h2>Creator-row statuses</h2>
+  <p class="ask">The per-creator live lines. Most already carry Katie well ("confirmed with Katie's team") — those keep v1. The v2 pass targets machine-voiced lines, over-claimed helping (creators pick on their own), and the local rows that contradict the <b>weekday-visits</b> guidance (flagged 📛 for Katie). Where v2 keeps v1, the <b>they/them sweep still applies</b> when the strings ship.</p>
+
+  <p class="sect-h">Day 4–5 · invites out</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Row</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">All 6 · day 4–5</td><td class="v1c">Invite sent this morning</td><td class="v2c"><b>Invite sent — we’ll text a nudge if they’re quiet</b></td></tr>
+  </table>
+
+  <p class="sect-h">Day 9 · cooking — product</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Maya</td><td class="v1c">📦 In transit — arriving Thursday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Nia</td><td class="v1c">🧴 Picked SPF 50 Tinted</td><td class="v2c"><span class="keep">keep v1</span> — they pick on their own</td></tr>
+    <tr><td class="who">Sofia</td><td class="v1c">✅ Confirmed — shipping next</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Jade</td><td class="v1c">📬 Delivered yesterday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Priya</td><td class="v1c">💭 Sketching content ideas</td><td class="v2c"><b>💬 Planned their angle with Katie’s team</b> — “sketching ideas” isn’t knowable; a plan relayed to the team is</td></tr>
+    <tr><td class="who">Casting row</td><td class="v1c">Sourcing her replacement… · Katie’s team is on it…</td><td class="v2c"><span class="keep">keep v1</span> — already Katie’s</td></tr>
+  </table>
+
+  <p class="sect-h">Day 10 · you ship — product (CSV)</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Maya</td><td class="v1c">📦 Shipped Tuesday — arriving Thursday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Nia / Jade</td><td class="v1c">🚚 Out for delivery · 📦 In transit — arriving Thursday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Sofia / Priya <span class="c--you c" style="font-size:10px">brand step</span></td><td class="v1c">Order ready to ship (+ “Ship and add tracking” button)</td><td class="v2c"><span class="keep">keep v1</span> — action rows stay short; the button carries it</td></tr>
+  </table>
+
+  <p class="sect-h">Day 11 · rematch found — product</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Maya</td><td class="v1c">📬 Delivered — unboxing soon</td><td class="v2c"><b>📬 Delivered — filming deadline texted</b> — “unboxing soon” promises what we can’t know</td></tr>
+    <tr><td class="who">Jade / Nia / Sofia / Priya</td><td class="v1c">📬 Delivered yesterday · 🚚 Out for delivery · 📦 In transit — arriving tomorrow · 🚚 Out for delivery</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">New match found</td><td class="v1c">Review new matches</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+  </table>
+
+  <p class="sect-h">Day 16 · first content — product</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Jade</td><td class="v1c">Reel submitted — checking quality…</td><td class="v2c"><b>Reel in — Katie’s team is checking it…</b></td></tr>
+    <tr><td class="who">Priya</td><td class="v1c">Story set submitted — checking quality…</td><td class="v2c"><b>Story set in — Katie’s team is checking it…</b></td></tr>
+    <tr><td class="who">Maya</td><td class="v1c">🎥 Films Saturday — confirmed with Katie’s team</td><td class="v2c"><span class="keep">keep v1</span> — already the model line</td></tr>
+    <tr><td class="who">Nia</td><td class="v1c">⏰ Draft due Sunday — we’re keeping her on pace</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Sofia</td><td class="v1c">🎬 Filming this week — draft due Sunday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Amara</td><td class="v1c">📅 Shoot booked for this week</td><td class="v2c"><b>📅 Shoot booked this week — confirmed by text</b></td></tr>
+  </table>
+
+  <p class="sect-h">Days 22 &amp; 30 · live + wrap — product</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Nia / Sofia / Jade · d22</td><td class="v1c">Live — 3× her usual views 🎉 · Live on TikTok 💬 · Live — engagement starting ✨</td><td class="v2c"><span class="keep">keep v1</span> — celebration stays about them, not us</td></tr>
+    <tr><td class="who">Maya / Priya · d22</td><td class="v1c">✅ Approved — posting Thursday · ✅ Approved — going live this week</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Amara · d22</td><td class="v1c">🎬 Draft due Sunday</td><td class="v2c"><b>🎬 Draft due Sunday — reminder texted</b></td></tr>
+    <tr><td class="who">All 6 · d30</td><td class="v1c">🏆 Top post — 63 likes &amp; comments · thank-you sent 💌 (etc.)</td><td class="v2c"><span class="keep">keep v1</span> — wrap rows are results; the rail carries the payout story</td></tr>
+  </table>
+
+  <p class="sect-h">Local rows <span class="modechip modechip--local">local</span> — days 9 · 11 · 16</p>
+  <table class="tbl">
+    <tr><th style="width:22%">Creator</th><th style="width:39%">V1</th><th style="width:39%">V2</th></tr>
+    <tr><td class="who">Maya · d9</td><td class="v1c">📅 Visiting tomorrow at 2pm</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Nia · d9 📛</td><td class="v1c">📅 Booked for Saturday morning</td><td class="v2c"><b>📅 Booked for Friday morning</b> — 📛 weekend date contradicts the weekday-visits guidance</td></tr>
+    <tr><td class="who">Jade · d9 📛</td><td class="v1c">📅 Visiting Sunday — asked about parking</td><td class="v2c"><b>📅 Visiting Monday — asked about parking, we sent directions</b></td></tr>
+    <tr><td class="who">Sofia · d9 <span class="c--you c" style="font-size:10px">brand step</span></td><td class="v1c">She emailed you (+ Confirm button)</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Priya · d9</td><td class="v1c">Will email you to book her visit</td><td class="v2c"><b>Will email you to book — nudge sent today</b></td></tr>
+    <tr><td class="who">Maya · d11</td><td class="v1c">✨ Visited Thursday — content in the works</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Jade · d11</td><td class="v1c">💅 Visited yesterday — posting soon</td><td class="v2c"><b>💅 Visited yesterday — we checked in after</b> — “posting soon” over-promises</td></tr>
+    <tr><td class="who">Sofia · d11 📛</td><td class="v1c">📅 Visiting Saturday at 11am</td><td class="v2c"><b>📅 Visiting Friday at 11am</b></td></tr>
+    <tr><td class="who">Priya · d11 📛</td><td class="v1c">📅 Booked for Sunday</td><td class="v2c"><b>📅 Booked for Tuesday</b></td></tr>
+    <tr><td class="who">Nia · d11</td><td class="v1c">📅 Visiting Friday</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Maya · d16</td><td class="v1c">Reel + story in — checking quality…</td><td class="v2c"><b>Reel + story in — Katie’s team is checking…</b></td></tr>
+    <tr><td class="who">Jade · d16</td><td class="v1c">TikTok submitted — checking quality…</td><td class="v2c"><b>TikTok in — Katie’s team is checking it…</b></td></tr>
+    <tr><td class="who">Nia / Sofia · d16</td><td class="v1c">🎬 Visited Thursday — filming her content · ✨ Visited Wednesday — editing her reel</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Priya · d16</td><td class="v1c">📅 Visiting Thursday at 4pm</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Lena · d16</td><td class="v1c">Will email you to book her visit</td><td class="v2c"><b>Will email you to book — nudge sent today</b></td></tr>
+  </table>
+</section>
+
+<!-- ══════════ STAGE HISTORY ══════════ -->
+<section class="chapter wrap" id="hist">
+  <p class="kicker">Expanded row drawer · future-step hints (NEXT_HINTS)</p>
+  <h2>Stage history — the “up next” lines</h2>
+  <p class="ask">Inside a creator's expanded row, future steps show what's <b>planned</b>. These seven default lines are the brand's map of the whole journey — v2 makes them a map of <b>who does what</b>: five of seven steps are ours.</p>
+  <table class="tbl">
+    <tr><th style="width:18%">Step</th><th style="width:27%">V1 — product</th><th style="width:28%">V2 — product</th><th style="width:27%">V2 — local <span class="modechip modechip--local" style="font-size:9.5px">local</span></th></tr>
+    <tr><td class="who">1 · Invited</td><td class="v1c">Invite goes out on your approval</td><td class="v2c"><span class="keep">keep v1</span></td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">2 · Accepted</td><td class="v1c">Waiting on her reply</td><td class="v2c"><b>Their reply — we nudge if they’re quiet</b></td><td class="v2c"><b>Their reply — we nudge if they’re quiet</b></td></tr>
+    <tr><td class="who">3 · Shipped / Confirmed</td><td class="v1c">Product pick + shipping label · She emails you to book her visit</td><td class="v2c"><b>They pick their favorite — we handle the shipping</b></td><td class="v2c"><b>They email you to book — we keep it quick</b></td></tr>
+    <tr><td class="who">4 · Delivered / Visited</td><td class="v1c">Delivery — we watch the tracking · Visit day — weekdays only</td><td class="v2c"><span class="keep">keep v1</span> — already ours</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">5 · Draft approved</td><td class="v1c">Draft + quality checks</td><td class="v2c"><b>Their draft — Katie’s team checks it</b></td><td class="v2c"><b>Their draft — Katie’s team checks it</b></td></tr>
+    <tr><td class="who">6 · Live!</td><td class="v1c">Post goes live — we track how it’s doing for you!</td><td class="v2c"><span class="keep">keep v1</span> — already ours</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">7 · Thanked</td><td class="v1c">Your thank-you — right after she posts</td><td class="v2c"><span class="keep">keep v1</span></td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+  </table>
+  <p class="sect-p" style="margin-top:12px">Timeline <i>done</i>-step details (“Delivered Jul 24”, “Accepted in under 5 hours”) keep v1 everywhere — they’re facts, and several already credit the team (“Hand-picked by Katie’s team”, “confirmed her angle with Katie’s team”). The honesty rules hold: done = forever-true fact · current may add forward flavor · future = plan only.</p>
+</section>
+
+<!-- ══════════ PAGE CHROME ══════════ -->
+<section class="chapter wrap" id="chrome">
+  <p class="kicker">Everything else the tracker says</p>
+  <h2>Page chrome — stat row, phases, header light, notes &amp; pop-ups</h2>
+  <table class="tbl">
+    <tr><th style="width:20%">Surface</th><th style="width:13%">State</th><th style="width:32%">V1</th><th style="width:35%">V2</th></tr>
+    <tr><td class="who">Stat row note</td><td class="st">mid-campaign</td><td class="v1c">🚀 Campaign on schedule, up to 4 weeks faster than industry average</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">wrap day</td><td class="v1c">🎉 Wrapped 37 days ahead of average</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Day 1 phase</td><td class="st">“Stay Tuned!”</td><td class="v1c">We're hand-picking creators who are the perfect fit for your campaign. We'll alert you via email and in-app notification.</td><td class="v2c"><b>Katie’s team is hand-picking creators who fit your brand. We’ll email you the moment your shortlist is ready — nothing for you to do until then.</b></td></tr>
+    <tr><td class="who">Day 3 phase</td><td class="st">shortlist ready</td><td class="v1c">We Found 6 creators who are a great fit — Review each profile and add the ones you'd like to invite to your campaign.</td><td class="v2c"><b>We found 6 creators who are a great fit — hand-picked by Katie’s team for your brief. Review each one and add your favorites.</b></td></tr>
+    <tr><td class="who">Header status light</td><td class="st">default all-clear</td><td class="v1c">Nothing needs you — everyone’s moving</td><td class="v2c"><b>Nothing for you to do — Katie’s team has everyone moving</b> · the flagship v2 sentence</td></tr>
+    <tr><td class="who"></td><td class="st">N waiting</td><td class="v1c">● N waiting on you</td><td class="v2c"><span class="keep">keep v1</span> — amber stays terse</td></tr>
+    <tr><td class="who"></td><td class="st">invites pending</td><td class="v1c">6 invited · 0 of 6 spots filled + ⓘ spots tooltip</td><td class="v2c"><span class="keep">keep v1</span> (tooltip stays the spots rule’s only home)</td></tr>
+    <tr><td class="who"></td><td class="st">live this week</td><td class="v1c">Nia, Sofia and Jade went live 🎉 — send your thank-yous now</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">wrapped</td><td class="v1c">Nothing left to do — campaign wrapped</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who"></td><td class="st">filtered</td><td class="v1c">{shown} of {cohort} · {filter} + Show all ✕</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Spots note</td><td class="st">invites out</td><td class="v1c">You have 6 spots for this campaign. We will match the first 6 creators who reply and save any extra for the next campaign!</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Thank-you note</td><td class="st">published, unthanked</td><td class="v1c">Deepen the relationship and brand love. Send thank yous!</td><td class="v2c"><b>Your creators are live! A thank-you from you lands deepest — everything else is already handled.</b></td></tr>
+    <tr><td class="who">Ship pop-up</td><td class="st">CSV order</td><td class="v1c">Have you shipped {name}’s order? — If it’s on its way, add the tracking number — we’ll watch the delivery and keep everyone posted for you.</td><td class="v2c"><span class="keep">keep v1</span> — already the v2 voice</td></tr>
+    <tr><td class="who">Visit pop-up</td><td class="st">local confirm</td><td class="v1c">{name} emailed you? — Confirm and set her visit date — we’ll take it from there and check in after the visit.</td><td class="v2c"><span class="keep">keep v1</span> — already the v2 voice</td></tr>
+    <tr><td class="who">Wrap band</td><td class="st">day 30</td><td class="v1c">All 6 live — every thank-you sent · 🎁 See your wrap-up</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Empty filter</td><td class="st">stage has nobody</td><td class="v1c">Nobody is in {stage} right now — clear the filter to see the rest of the cohort.</td><td class="v2c"><span class="keep">keep v1</span></td></tr>
+    <tr><td class="who">Rail card subtitle</td><td class="st">every day 📛</td><td class="v1c">“Since, Friday” — stray comma in the render</td><td class="v2c"><b>“Since Friday”</b> — drop the comma (one-line code fix in amine.jsx)</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ COVERAGE MAP ══════════ -->
+<section class="chapter wrap" id="cov">
+  <p class="kicker">Does every kind of work show up somewhere?</p>
+  <h2>Coverage map — work type × day</h2>
+  <p class="ask">Green dot = v2 shows this work that day · amber dot = a <b>new</b> v2 line carries it. Reading down a column answers "what does the brand learn we did today"; reading across a row answers "does this work ever go unseen".</p>
+  <table class="tbl cov">
+    <tr><th>Work</th><th>D4–5</th><th>D9</th><th>D10</th><th>D11</th><th>D16</th><th>D22</th><th>D30</th></tr>
+    <tr><td class="who">🔍 Casting &amp; vetting</td><td class="dot"><span class="new"></span></td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"></td><td class="dot"><span class="on"></span></td></tr>
+    <tr><td class="who">📱 Texts &amp; nudges</td><td class="dot"><span class="new"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="new"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="new"></span></td></tr>
+    <tr><td class="who">⏰ Deadline reminders</td><td class="dot"></td><td class="dot"></td><td class="dot"></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td></tr>
+    <tr><td class="who">🧴 Product picks</td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"></td><td class="dot"></td><td class="dot"></td></tr>
+    <tr><td class="who">📅 Visit reminders</td><td class="dot"><span class="new"></span></td><td class="dot"><span class="new"></span></td><td class="dot">—</td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"></td></tr>
+    <tr><td class="who">📦 Tracking watched</td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"></td><td class="dot"></td><td class="dot"></td></tr>
+    <tr><td class="who">🛡️ Quality checks</td><td class="dot"></td><td class="dot"><span class="new"></span></td><td class="dot"></td><td class="dot"></td><td class="dot"><span class="on"></span></td><td class="dot"><span class="on"></span></td><td class="dot"></td></tr>
+    <tr><td class="who">💸 Payments <span class="st">(paid only)</span></td><td class="dot"></td><td class="dot"></td><td class="dot"></td><td class="dot"></td><td class="dot"></td><td class="dot"><span class="new"></span></td><td class="dot"><span class="new"></span></td></tr>
+  </table>
+  <p class="sect-p" style="margin-top:12px">Payments deliberately appear only once posts go live (day 22) and at wrap — earlier would raise "wait, what am I paying?" questions mid-flow. If Katie wants payouts visible earlier, the day-16 Up next has room for one line.</p>
+</section>
+
+<!-- ══════════ QUESTIONS ══════════ -->
+<section class="chapter wrap" id="qs">
+  <p class="kicker">Before this ships</p>
+  <h2>For Katie — settled on Aug 13 vs. still open</h2>
+  <div class="delta"><b>Settled on the call:</b> no pool numbers at the invite stage · no engagement metrics before posts exist · reminder lines stay neutral ("still deciding", never "unresponsive") · follow-ups line is neutral ("if any follow-ups are needed, Katie's team will be on it") · submit deadlines never shown as go-live · days 4 + 5 combine · pre-delivery readiness check is claimable ("ready to film and knows the campaign requirements") · <b>new variant axis to build: multi-location vs single location</b>.</div>
+  <div class="qs">
+    <h3>The copy can only claim what admin captures — check these</h3>
+    <ol>
+      <li><b>Exact SMS counts:</b> comfortable showing brands real numbers ("9 texts this week", "41 texts" at wrap)? They read straight from the SMS log — if a week is quiet the line hides (no zeros).</li>
+      <li><b>"Texted" wording &amp; consent:</b> counts must only cover opted-in creators (the portal checkbox is the legal opt-in; Tony is confirming the manual-text carve-out). OK to name SMS as the channel, or should copy say "reminders" without the channel?</li>
+      <li><b>Payments:</b> DECIDED (Julia, Aug 13): payout lines are a <b>paid-campaign fork</b> — gifted campaigns (most of them) never show payment language. Still open: timing ("in motion" at day 22 → "paid" at wrap?) and the word — "paid", "payout closed", "payment sent".</li>
+      <li><b>Product-pick help:</b> is the helped-her-pick moment reliably logged in admin, so "Helped Nia and Maya pick their products" is always literally true? Same for visit-time coordination on local.</li>
+      <li><b>Day-after check-ins:</b> is checking in with a creator after her visit standard enough to claim every time ("we checked in with both after their visits")?</li>
+      <li><b>Weekday visits:</b> demo rows say Saturday/Sunday while the guidance says weekdays — which is true in practice? (📛 rows in the statuses chapter.)</li>
+      <li><b>What's still invisible?</b> This list covers texts, reminders, tracking, picks, visits, checks, payouts. What else does the team do weekly that admin could log and the tracker could say?</li>
+    </ol>
+  </div>
+  <footer class="wrap" style="padding:0">
+    Sources: benable-brand-prototype-v43 — src/components/pulse/pulseData.js + amine.jsx + docs/Brand&nbsp;Dashboard&nbsp;2.0 states-and-logic.md · All v1 strings verbatim from the prototype · Aug 13 · tracker-copy-v2 @ localhost:4227
+  </footer>
+</section>
+
+</body>
+</html>
