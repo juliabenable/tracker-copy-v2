@@ -56,20 +56,20 @@
   .vlab--v2 { color: #17864f; }
 
   /* the rail card, at production fidelity */
-  .railcard { background: #fff; border: 1px solid #e6e6e6; border-radius: 16px; padding: 18px 18px 8px; }
+  .railcard { background: #fff; border: 1px solid #e6e6e6; border-radius: 16px; padding: 0 0 6px; overflow: hidden; }
   .col--v2 .railcard { border-color: #bcdcc9; box-shadow: 0 4px 10px rgba(23,134,79,0.06); }
-  .rc-head { display: flex; gap: 11px; align-items: center; margin-bottom: 13px; }
+  .rc-head { background: #f8f9fa; border-bottom: 1px solid #ececec; padding: 13px 18px; margin-bottom: 4px; }
   .rc-tile { width: 34px; height: 34px; border-radius: 9px; background: #f5f3fc; display: grid; place-items: center; font-size: 16px; flex: none; }
   .rc-title { font-size: 15px; font-weight: 800; letter-spacing: -0.2px; }
   .rc-sub { font-size: 12px; color: #8e8e8e; margin-top: 1px; }
   .rc-sub b { color: #1c1c1c; font-weight: 700; }
-  .note { display: flex; gap: 11px; padding: 10px 2px; border-bottom: 1px solid #f2f2f2; }
+  .note { display: flex; gap: 11px; padding: 10px 18px; border-bottom: 1px solid #f2f2f2; }
   .note:last-of-type { border-bottom: 0; }
   .note .em { font-size: 16px; flex: none; width: 22px; text-align: center; }
   .note p { font-size: 13px; line-height: 1.5; color: #5f5f5f; }
   .note p b { color: #1c1c1c; font-weight: 700; }
   .note .star { color: #d79f22; font-weight: 800; font-size: 11px; margin-left: 5px; letter-spacing: 0.04em; }
-  .closer { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #ececec; margin-top: 4px; padding: 12px 2px; }
+  .closer { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #ececec; margin-top: 4px; padding: 12px 18px; }
   .closer .tx { font-size: 13px; font-weight: 700; }
   .closer.clear .tx { font-weight: 600; color: #1c6b46; display: flex; gap: 8px; align-items: center; }
   .closer.clear .tx::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2fa96a; flex: none; }
@@ -184,7 +184,8 @@
       <li class="n"><b>Creators are they/them</b> in every line — never "she/her". Applies to kept-v1 strings too when they ship. <i>(Julia, Aug 13)</i></li>
       <li class="n"><b>Visits belong to the brand</b> — creators email the brand, the brand sets the date. Our verbs: remind, track, check in — never "coordinate". <i>(Julia, Aug 13)</i></li>
       <li class="n"><b>Creators pick products on their own</b> — we set up the selection and double-check orders; no "helped her pick". <i>(Julia, Aug 13)</i></li>
-      <li class="n"><b>Benable-review mode: the brand never sees first cuts</b> — closers stay all-clear until posts go live. <i>(Julia, Aug 13)</i></li>
+      <li class="n"><b>Benable-review mode: the brand never sees first cuts.</b> <i>(Julia, Aug 13)</i></li>
+      <li class="n"><b>No closer row.</b> The rail cards end with their items — no pinned CTA/all-clear strip, whether or not an action is due; anything worth saying is a regular line. Card headers wear the app’s grey band (#f8f9fa). <i>(Julia)</i></li>
     </ul>
   </div>
 </section>
@@ -234,19 +235,18 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>yesterday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>yesterday</b></p></div></div>
         <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
         <div class="closer clear"><span class="tx">Nothing needs you — acceptances usually land within 48h</span></div>
       </div>
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>yesterday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>yesterday</b></p></div></div>
         <div class="note"><span class="em">💌</span><p><b>6 personalized emails sent</b> — invites out the moment you approved your picks</p></div>
         <div class="note"><span class="em">📱</span><p><b>Katie’s team is individually texting each creator</b> — making sure they see their invite ASAP<span class="star">★ NEW</span></p></div>
         <div class="note"><span class="em">🔍</span><p><b>Every creator was individually reviewed</b> — checked against your brief and confirmed open to gifted products<span class="star">★ NEW</span></p></div>
         <div class="note"><span class="em">✅</span><p><b>First yeses are in</b> — 2 accepted on day one<span class="star">★ NEW</span></p></div>
-        <div class="closer clear"><span class="tx">Nothing for you to do — if any follow-ups are needed, Katie’s team is on it</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ 3 new lines</span> · the "2 accepted" line renders only when true (speed receipts never fabricated); reminder framing stays neutral — never "unresponsive".</p>
     </div>
@@ -255,17 +255,18 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>First acceptances land</b> — usually within 48h</p></div>
         <div class="note"><span class="em">📦</span><p><b>Product picks + shipping</b> — right after each acceptance</p></div>
       </div>
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>First creators accept the campaign</b> — usually within 48h</p></div>
         <div class="note"><span class="em">🧴</span><p><b>Creators pick their favorite products from your selection</b> — we double-check everything runs smoothly</p></div>
         <div class="note"><span class="em">📦</span><p><b>We tell each creator when their product ships and lands</b> — and help them track it by text<span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">🤝</span><p><b>If any follow-ups are needed</b> — Katie’s team is on it</p></div>
       </div>
       <p class="ann">Shows: <span class="c">🧴 product picks</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · "pick their favorites" is Katie's warm framing of the selection moment; the shipping line covers the old day-5 notes ("we handle telling creators when products ship and deliver — so they can start planning their content").</p>
     </div>
@@ -274,17 +275,18 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>First acceptances land</b> — usually within 48h</p></div>
         <div class="note"><span class="em">📧</span><p><b>Creators email you to book their visits</b> — right after each acceptance</p></div>
       </div>
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>First creators accept the campaign</b> — usually within 48h</p></div>
         <div class="note"><span class="em">📧</span><p><b>Creators email you to book their visits</b> — right after each acceptance</p></div>
         <div class="note"><span class="em">📅</span><p><b>Share each visit date with us</b> — we’ll handle reminding the creators<span class="star">★ NEW</span></p></div>
+        <div class="note"><span class="em">🤝</span><p><b>If any follow-ups are needed</b> — Katie’s team is on it</p></div>
       </div>
       <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">📱 texts</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · the share-the-date prompt turns the brand’s one email into delegation — after that, reminders are ours.</p>
     </div>
@@ -301,7 +303,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
         <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
         <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
         <div class="note"><span class="em">👋</span><p><b>2 reminders to accept sent</b> — nothing needed your input</p></div>
@@ -311,12 +313,11 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
         <div class="note"><span class="em">✅</span><p><b>4 creators accepted their invites</b> — took less than 24 hours</p></div>
         <div class="note"><span class="em">📱</span><p><b>Katie’s team texted 2 reminders</b> to the creators still deciding — nothing needed from you</p></div>
         <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — Katie’s team is already sourcing a replacement</p></div>
         <div class="note"><span class="em">🎬</span><p><b>Before each package lands, we confirm they’re ready to film</b> — and know the campaign requirements<span class="star">★ NEW</span></p></div>
-        <div class="closer clear"><span class="tx">Nothing for you to do — first delivery lands Thursday; we’re watching every package</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">🔍 casting</span> <span class="c">🛡️ checks</span> <span class="c">📦 tracking</span> <span class="c--k c">Katie pass</span> <span class="c--new c">★ new line</span> · the speed receipt renders only when literally true — quiet when it isn't.</p>
     </div>
@@ -325,7 +326,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — first delivery Thursday</p></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement picks</b> — within 48h — we’ll ping you</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
@@ -333,7 +334,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📦</span><p><b>First delivery lands Thursday</b> — we’re watching all 3 tracking numbers and keeping each creator posted so they can plan their week</p></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement picks from Katie’s team</b> — we’re on it, we’ll ping you ASAP</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive; we’ll ping you as content goes live</p></div>
@@ -345,7 +346,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
         <div class="note"><span class="em">✉️</span><p><b>6 invites sent</b> — the moment you approved your picks</p></div>
         <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
         <div class="note"><span class="em">👋</span><p><b>2 reminders to accept sent</b> — nothing needed your input</p></div>
@@ -355,12 +356,12 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
         <div class="note"><span class="em">✅</span><p><b>4 creators accepted their invites</b> — took less than 24 hours</p></div>
         <div class="note"><span class="em">📱</span><p><b>Katie’s team texted 2 reminders</b> to the creators still deciding — nothing needed from you</p></div>
         <div class="note"><span class="em">📅</span><p><b>3 visits booked for this week</b> — we remind each creator before their visit</p></div>
+        <div class="note"><span class="em">📧</span><p><b>Sofia emailed you</b> — reply to set the visit date</p></div>
         <div class="note"><span class="em">🔁</span><p><b>1 creator declined</b> — Katie’s team is already sourcing a replacement</p></div>
-        <div class="closer"><span class="tx">Sofia emailed you — reply to set the visit date</span><span class="cta">Confirm visit</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📱 texts</span> <span class="c">📅 visits</span> <span class="c">🔍 casting</span> <span class="c--k c">Katie pass</span> <span class="c--you c">amber: brand step</span> · when several creators have emailed, the closer aggregates: <b>"Sofia and 2 more emailed you — set their visit dates."</b></p>
     </div>
@@ -369,7 +370,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💅</span><p><b>First creator to visit</b> — tomorrow</p></div>
         <div class="note"><span class="em">📅</span><p><b>You have 3 creators visiting next week</b> — dates confirmed</p></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement picks</b> — within 48h — we’ll ping you</p></div>
@@ -377,7 +378,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💅</span><p><b>First creator visits tomorrow</b> — we’ve already sent them a reminder</p></div>
         <div class="note"><span class="em">📅</span><p><b>3 more visits next week</b> — we’re keeping track of everything for you</p></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement picks from Katie’s team</b> — we’re on it, we’ll ping you ASAP</p></div>
@@ -397,7 +398,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Friday</b></p></div></div>
         <div class="note"><span class="em">✅</span><p><b>4 of 6 accepted their invite</b></p></div>
         <div class="note"><span class="em">🧴</span><p><b>2 creators picked their products</b> — their orders are ready for you</p></div>
         <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — we’re watching the tracking</p></div>
@@ -406,11 +407,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Friday</b></p></div></div>
         <div class="note"><span class="em">🧴</span><p><b>Sofia and Priya picked their favorites from your selection</b> — their orders are ready for you</p></div>
         <div class="note"><span class="em">📦</span><p><b>3 packages in transit</b> — we check the tracking daily and keep the creators informed</p></div>
         <div class="note"><span class="em">📱</span><p><b>9 texts this week</b> kept everything moving — replies, picks and ship dates<span class="star">★ NEW</span></p></div>
-        <div class="closer"><span class="tx">2 orders are ready to ship — the only step that’s yours</span><span class="cta">Download orders</span></div>
       </div>
       <p class="ann">Shows: <span class="c">🧴 product picks</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c--you c">amber: brand step</span> <span class="c--new c">★ new line</span> · the 9 comes straight from the SMS log for this campaign-week.</p>
     </div>
@@ -419,7 +419,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📦</span><p><b>2 orders waiting on your shipment</b> — mark shipped + add tracking</p></div>
         <div class="note"><span class="em">🚚</span><p><b>We track every delivery once tracking is in</b> — automatic</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
@@ -427,7 +427,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📦</span><p><b>2 orders waiting on your shipment</b> — ship + add tracking, and you’re done</p></div>
         <div class="note"><span class="em">🚚</span><p><b>We take it from there</b> — Katie’s team watches every delivery and keeps the creators posted</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive</p></div>
@@ -447,7 +447,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement matches found</b> — profiles ready for your review</p></div>
         <div class="note"><span class="em">📬</span><p><b>2 packages delivered</b> — 3 more on the truck</p></div>
         <div class="note"><span class="em">⏰</span><p><b>Deadline reminders sent</b> to keep everyone on pace</p></div>
@@ -456,11 +456,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement matches found in 48h</b> — Katie’s team already vetted the profiles</p></div>
         <div class="note"><span class="em">📬</span><p><b>2 packages delivered, 3 more on the truck</b> — we’re tracking every one</p></div>
         <div class="note"><span class="em">📱</span><p><b>Katie’s team texted every creator their filming deadline</b> — everyone knows their date</p></div>
-        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
       </div>
       <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
     </div>
@@ -469,7 +468,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">✨</span><p><b>Pick who you want to add to this campaign</b> — waiting on you</p></div>
         <div class="note"><span class="em">📦</span><p><b>Last packages deliver</b> — by tomorrow</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — this weekend</p></div>
@@ -477,7 +476,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — product</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">✨</span><p><b>Pick who joins the campaign</b> — Katie’s team already vetted them, ready for your review</p></div>
         <div class="note"><span class="em">📦</span><p><b>Last packages land by tomorrow</b> — we’re watching the tracking</p></div>
         <div class="note"><span class="em">🎬</span><p><b>First creators start filming</b> — the moment their products arrive; we’ll ping you as content goes live</p></div>
@@ -489,7 +488,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Thursday</b></p></div></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement matches found</b> — profiles ready for your review</p></div>
         <div class="note"><span class="em">💅</span><p><b>2 creators visited this week</b> — content is on the way</p></div>
         <div class="note"><span class="em">⏰</span><p><b>Deadline reminders sent</b> to keep everyone on pace</p></div>
@@ -498,11 +497,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Thursday</b></p></div></div>
         <div class="note"><span class="em">🔁</span><p><b>Replacement matches found in 48h</b> — Katie’s team already vetted the profiles</p></div>
         <div class="note"><span class="em">💅</span><p><b>2 creators visited this week</b> — we checked in with both after their visits; they’re creating content!<span class="star">★ NEW</span></p></div>
         <div class="note"><span class="em">📱</span><p><b>Katie’s team texted every creator their content deadline</b> — everyone knows their date</p></div>
-        <div class="closer"><span class="tx">New matches are waiting</span><span class="cta">Review matches</span></div>
       </div>
       <p class="ann">Shows: <span class="c">🔍 casting</span> <span class="c">📅 visits</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--new c">★ new</span> · the day-after check-in is real admin work — say it.</p>
     </div>
@@ -511,7 +509,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">✨</span><p><b>Pick who you want to add to this campaign</b> — waiting on you</p></div>
         <div class="note"><span class="em">📅</span><p><b>3 more visits booked</b> — Friday through Sunday</p></div>
         <div class="note"><span class="em">🎬</span><p><b>Content lands after each visit</b> — within days</p></div>
@@ -519,7 +517,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed — <span class="modechip modechip--local">local</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">✨</span><p><b>Pick who joins the campaign</b> — profiles vetted and ready for your review</p></div>
         <div class="note"><span class="em">📅</span><p><b>3 more visits, Friday through Sunday</b> — we’ll remind each creator the day before</p></div>
       </div>
@@ -538,7 +536,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — product · Katie's team reviews</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
         <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
         <div class="note"><span class="em">🎬</span><p><b>2 videos submitted for review</b> — Katie’s team is reviewing them for quality</p></div>
@@ -547,11 +545,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — product · Katie's team reviews</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
         <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — Katie’s team keeps everyone on pace, nothing needed from you</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>2 videos in — Katie’s team is checking them against your brief</b> before anything goes live</p></div>
-        <div class="closer clear"><span class="tx">Nothing for you to do — Katie’s team is reviewing the first cuts; you should see them live next week</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📦 tracking</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c">🛡️ checks</span></p>
     </div>
@@ -560,7 +557,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — product · <span class="modechip modechip--brand">brand reviews</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>2 posts passed Katie’s team’s checks</b> — brief points verified before they reached you</p></div>
         <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
@@ -569,11 +566,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — product · <span class="modechip modechip--brand">brand reviews</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">📬</span><p><b>All products delivered</b> — the creators are creating!</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>Katie’s team pre-checked 2 posts</b> — brief points verified before they reached you</p></div>
         <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — everyone knows their date</p></div>
-        <div class="closer"><span class="tx">Jade’s reel and Priya’s story are ready for you</span><span class="cta">Review the 2 posts</span></div>
       </div>
       <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--you c">amber: brand step</span></p>
     </div>
@@ -582,7 +578,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — product · Up next (Katie reviews / brand reviews)</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — after quality checks!</p></div>
         <div class="note"><span class="em">🎬</span><p><b>Creators submit drafts — Katie’s team vets every one</b> — through Sunday</p></div>
         <div class="note"><span class="em">👀</span><p><b>Two posts to review — Jade’s reel and Priya’s story</b> — waiting on you <span class="modechip modechip--brand">brand variant</span></p></div>
@@ -591,7 +587,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — product · Up next (Katie reviews / brand reviews)</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — right after Katie’s team’s checks</p></div>
         <div class="note"><span class="em">🎬</span><p><b>More content is on the way</b> — every draft reviewed against your brief; you should see it live next week</p></div>
         <div class="note"><span class="em">👀</span><p><b>Two posts to review — Jade’s reel and Priya’s story</b> — ready for your review <span class="modechip modechip--brand">brand variant</span></p></div>
@@ -604,7 +600,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · Katie's team reviews</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — everyone’s been in</p></div>
         <div class="note"><span class="em">🎬</span><p><b>3 posts submitted for review</b> — Katie’s team is checking them for quality</p></div>
         <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
@@ -613,11 +609,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · Katie's team reviews</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — we checked in with each one after their visit</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>3 posts in — Katie’s team is checking them against your brief</b> before anything goes live</p></div>
         <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — nothing needed from you</p></div>
-        <div class="closer clear"><span class="tx">Nothing for you to do — Katie’s team is reviewing the first cuts; you should see them live next week</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span></p>
     </div>
@@ -626,7 +621,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · <span class="modechip modechip--brand">brand reviews</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — everyone’s been in</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>3 posts passed Katie’s team’s checks</b> — brief points verified before they reached you</p></div>
         <div class="note"><span class="em">👋</span><p><b>4 filming nudges sent</b> — everyone knows their deadline</p></div>
@@ -635,11 +630,10 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · <span class="modechip modechip--brand">brand reviews</span></p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Sunday</b></p></div></div>
         <div class="note"><span class="em">💅</span><p><b>3 creators visited this week</b> — we checked in with each one after their visit</p></div>
         <div class="note"><span class="em">🛡️</span><p><b>Katie’s team pre-checked all 3 posts</b> — brief points verified before they reached you</p></div>
         <div class="note"><span class="em">📱</span><p><b>4 deadline-reminder texts sent</b> — everyone knows their date</p></div>
-        <div class="closer"><span class="tx">Maya’s and Jade’s posts are ready for you</span><span class="cta">Review the 3 posts</span></div>
       </div>
       <p class="ann">Shows: <span class="c">📅 visits</span> <span class="c">🛡️ checks</span> <span class="c">📱 texts</span> <span class="c--you c">amber: brand step</span></p>
     </div>
@@ -648,7 +642,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 — <span class="modechip modechip--local">local</span> · Up next (Katie reviews / brand reviews)</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — after quality checks!</p></div>
         <div class="note"><span class="em">🎬</span><p><b>More drafts land as creators finish editing</b> — Katie’s team vets every one</p></div>
         <div class="note"><span class="em">📅</span><p><b>Priya visits Thursday, Lena is booking hers</b> — this week</p></div>
@@ -657,7 +651,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 — <span class="modechip modechip--local">local</span> · Up next (Katie reviews / brand reviews)</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">📣</span><p><b>First posts go live</b> — right after Katie’s team’s checks</p></div>
         <div class="note"><span class="em">🎬</span><p><b>More drafts on the way</b> — we text each creator as their deadline nears</p></div>
         <div class="note"><span class="em">📅</span><p><b>Priya visits Thursday, Lena is booking a time with you</b> — this week</p></div>
@@ -679,7 +673,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Monday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>Monday</b></p></div></div>
         <div class="note"><span class="em">📣</span><p><b>3 posts went live</b> on IG &amp; TikTok</p></div>
         <div class="note"><span class="em">👀</span><p><b>18.2k views</b> and climbing</p></div>
         <div class="note"><span class="em">💬</span><p><b>People are loving it</b> — “best SPF I’ve tried, hands down” · @niaglow</p></div>
@@ -688,12 +682,11 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Monday</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>Monday</b></p></div></div>
         <div class="note"><span class="em">📣</span><p><b>3 posts went live</b> on IG &amp; TikTok — tags and links verified by Katie’s team</p></div>
         <div class="note"><span class="em">👀</span><p><b>18.2k views</b> and climbing — we’re tracking how every post is doing for you</p></div>
         <div class="note"><span class="em">💸</span><p><b>Creator payouts are in motion</b> — Katie’s team handles every payment, nothing for you to settle <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
         <div class="note"><span class="em">💬</span><p><b>People are loving it</b> — “best SPF I’ve tried, hands down” · @niaglow</p></div>
-        <div class="closer"><span class="tx">Nia’s reel is taking off</span><span class="cta">Open the post</span></div>
       </div>
       <p class="ann">Shows: <span class="c">🛡️ checks</span> <span class="c">📦 tracking</span> <span class="c">💸 payments</span> <span class="c--new c">★ new line</span> · quote rules hold: views only &gt;1k, quote only &gt;50 likes.</p>
     </div>
@@ -702,7 +695,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>Send your thank-yous</b> — 3 creators are live</p></div>
         <div class="note"><span class="em">⏰</span><p><b>Last creators go live</b> — this week</p></div>
         <div class="note"><span class="em">🏁</span><p><b>Campaign wrap</b> — we’ll send you your campaign recap</p></div>
@@ -710,7 +703,7 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">💌</span><p><b>Send your thank-yous</b> — 3 creators are live; a thank-you from you lands deeper than anything we could send</p></div>
         <div class="note"><span class="em">⏰</span><p><b>Last creators go live this week</b> — we’ve texted each one their posting date</p></div>
         <div class="note"><span class="em">💸</span><p><b>Payouts close as each post goes live</b> — Katie’s team pays everyone for you <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
@@ -731,7 +724,7 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>last week</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since, <b>last week</b></p></div></div>
         <div class="note"><span class="em">🏆</span><p><b>Top post: 63 likes &amp; comments</b> — Nia’s reel</p></div>
         <div class="note"><span class="em">💌</span><p><b>Thank-yous sent</b> to all 6 creators</p></div>
         <div class="closer"><span class="tx">Your wrap-up is ready</span><span class="cta">See the wrap-up</span></div>
@@ -739,12 +732,12 @@
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">✉️</span><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>last week</b></p></div></div>
+        <div class="rc-head"><div><p class="rc-title">While you were away</p><p class="rc-sub">Since <b>last week</b></p></div></div>
         <div class="note"><span class="em">🏆</span><p><b>Top post: 63 likes &amp; comments</b> — Nia’s reel</p></div>
         <div class="note"><span class="em">💸</span><p><b>All 6 creators paid</b> — Katie’s team closed out every payout for you <span class="modechip">paid campaigns</span><span class="star">★ NEW</span></p></div>
-        <div class="note"><span class="em">💌</span><p><b>Thank-yous sent to all 6</b> — every one delivered with your name on it</p></div>
+        <div class="note"><span class="em">💌</span><p><b>Thank-yous sent to all 6</b> — the human touch makes all the difference!</p></div>
         <div class="note"><span class="em">🧾</span><p><b>Behind the scenes: 41 texts · 12 reminders · 6 payouts</b> — handled by Katie’s team so you never had to <span class="modechip">payouts: paid campaigns</span><span class="star">★ NEW</span></p></div>
-        <div class="closer"><span class="tx">Your wrap-up is ready</span><span class="cta">See the wrap-up</span></div>
+        <div class="note"><span class="em">🎁</span><p><b>Your wrap-up is ready</b> — from Katie’s team</p></div>
       </div>
       <p class="ann">Shows: <span class="c">💸 payments</span> <span class="c">📱 texts</span> <span class="c">⏰ deadlines</span> <span class="c--new c">★ 2 new lines</span> · the tally is the campaign-long sum from the same logs — and the natural seed for the Wrapped-style slides.</p>
     </div>
@@ -753,13 +746,13 @@
   <div class="cmp">
     <div class="col--v1"><p class="vlab">V1 · live today</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">🚀</span><p><b>Campaign #2 — same crew or fresh faces</b> — whenever you’re ready</p></div>
       </div>
     </div>
     <div class="col--v2"><p class="vlab vlab--v2">V2 · proposed</p>
       <div class="railcard">
-        <div class="rc-head"><span class="rc-tile">🗓️</span><div><p class="rc-title">Up next</p></div></div>
+        <div class="rc-head"><div><p class="rc-title">Up next</p></div></div>
         <div class="note"><span class="em">🚀</span><p><b>Campaign #2 — same crew or fresh faces</b> — Katie’s team is ready when you are</p></div>
       </div>
       <p class="ann">Shows: <span class="c">🔍 casting</span> · the ongoing-campaigns offer in one clause: the team stays on.</p>
